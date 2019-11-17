@@ -57,14 +57,15 @@ heatmap.axes.set_ylim(0,0.75)
 ###################################
 
 first_call=True
-avgno = 75
+avgno = 50
 initial_data=np.zeros(16)
 k = 0 # frame counter
+maxiter = 1000 # max frames before exit
 ser = serial.Serial('/dev/ttyACM0',9600)
 s = [0 for i in range(1,17)]
 while True:
     k += 1
-    if k == 1000:
+    if k == maxiter:
      break
     tot = np.zeros(16)
     for i in range(1,avgno):
@@ -81,7 +82,7 @@ while True:
     data=tot/avgno-initial_data
     print(data)
     cc = griddata((xs, ys), data, (xx[None, :], yy[:, None]), method='cubic')
-    heatmap.contourf(xx, yy, cc, 300, cmap=cmap_choice)#, vmin=0, vmax=200)
+    heatmap.contourf(xx, yy, cc, 300, cmap=cmap_choice, vmin=-20, vmax=20)
 
     Bottom = [data[0], data[4], data[8], data[12]]
     Top = [data[3], data[7], data[11], data[15]]
@@ -93,18 +94,18 @@ while True:
     TopAv = np.average(Top)
     BotAv = np.average(Bottom)
 
-    if(1.1*LHSAv > RHSAv):
-        txth = "Leaning too far to the left"
-    elif(1.1*RHSAv > LHSAv):
+    if(abs(LHSAv/RHSAv)>7):
         txth = "Leaning too far to the right"
+    elif(abs(RHSAv/LHSAv)>7):
+        txth = "Leaning too far to the left"
     else:
-        txth = "Looking good (left/right)"
-    if(1.1*TopAv > BotAv):
+        txth = ""
+    if(abs(TopAv/BotAv)>7):
         txtv = "Leaning too far forward"
-    elif(1.1*BotAv > TopAv):
+    elif(abs(BotAv/TopAv)>7):
         txtv = "Leaning too far backward"
     else:
-        txtv = "Looking good (forward/backward)"
+        txtv = ""
 
 #    HCD = heatmap.contourf(xx, yy, cc, 300, cmap=cmap_choice, vmin=0.0,
 #                           vmax=1000)
