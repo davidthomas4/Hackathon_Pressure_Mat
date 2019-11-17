@@ -46,6 +46,10 @@ yy = np.linspace(min(ys), max(ys), 50)
 
 fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(5,5))
 fig.subplots_adjust(bottom=0.15,top=0.9,left=0.1,right=0.85)
+fig.text(0.5,0.92,"Back", ha="center")
+fig.text(0.5,0.1,"Front", ha="center")
+fig.text(0.07,0.5,"Right", rotation="vertical", ha="center")
+fig.text(0.89,0.5,"Left", rotation=270, ha="center")
 
 heatmap = plt.subplot(111)
 heatmap.axes.set_xlim(0,0.75)
@@ -80,32 +84,31 @@ while True:
               continue
          tot+=np.array(datain, dtype=float)
     data=tot/avgno-initial_data
-    print(data)
     cc = griddata((xs, ys), data, (xx[None, :], yy[:, None]), method='cubic')
     heatmap.contourf(xx, yy, cc, 300, cmap=cmap_choice, vmin=-20, vmax=20)
 
-    Bottom = [data[0], data[4], data[8], data[12]]
-    Top = [data[3], data[7], data[11], data[15]]
-    RHS = [data[12], data[13], data[14], data[15]]
-    LHS = [data[0], data[1], data[2], data[3]]
-
-    RHSAv = np.average(RHS)
-    LHSAv = np.average(LHS)
-    TopAv = np.average(Top)
-    BotAv = np.average(Bottom)
-
-    if(abs(LHSAv/RHSAv)>7):
-        txth = "Leaning too far to the right"
-    elif(abs(RHSAv/LHSAv)>7):
-        txth = "Leaning too far to the left"
-    else:
-        txth = ""
-    if(abs(TopAv/BotAv)>7):
-        txtv = "Leaning too far forward"
-    elif(abs(BotAv/TopAv)>7):
-        txtv = "Leaning too far backward"
-    else:
-        txtv = ""
+#    Bottom = [data[0], data[4], data[8], data[12]]
+#    Top = [data[3], data[7], data[11], data[15]]
+#    RHS = [data[12], data[13], data[14], data[15]]
+#    LHS = [data[0], data[1], data[2], data[3]]
+#
+#    RHSAv = np.average(RHS)
+#    LHSAv = np.average(LHS)
+#    TopAv = np.average(Top)
+#    BotAv = np.average(Bottom)
+#
+#    if(abs(LHSAv/RHSAv)>7):
+#        txth = "Leaning too far to the right"
+#    elif(abs(RHSAv/LHSAv)>7):
+#        txth = "Leaning too far to the left"
+#    else:
+#        txth = ""
+#    if(abs(TopAv/BotAv)>7):
+#        txtv = "Leaning too far forward"
+#    elif(abs(BotAv/TopAv)>7):
+#        txtv = "Leaning too far backward"
+#    else:
+#        txtv = ""
 
 #    HCD = heatmap.contourf(xx, yy, cc, 300, cmap=cmap_choice, vmin=0.0,
 #                           vmax=1000)
@@ -117,8 +120,8 @@ while True:
 #    cbar.ax_set_yticklabels([0,0.25,0.5,0.75,1])
 #    cbar.ax.tick_params(width=2, length=10)
 
-    for txt in fig.texts:
-        txt.set_visible(False)
+#    for txt in fig.texts:
+#        txt.set_visible(False)
 #    fig.text(0.15, 0.8, txth)
 #    fig.text(0.15, 0.7, txtv)
     plt.pause(0.0000000001)
