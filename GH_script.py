@@ -15,7 +15,6 @@ import math
 import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
-import matplotlib.animation as FuncAnimation
 from scipy.interpolate import griddata
 import serial
 import re
@@ -24,22 +23,14 @@ import re
 
 mpl.rcParams['font.size'] = 20
 mpl.rcParams['font.weight'] ='bold'
-#mpl.rcParams['xtick.major.pad'] = '10'
-#mpl.rcParams['ytick.major.pad'] = '10'
 mpl.rcParams['axes.linewidth'] = 2
-#mpl.rcParams['xtick.labelsize'] = 20
-#mpl.rcParams['ytick.labelsize'] = 20
 
 # Heat map colour code - google for other codes.
 cmap_choice = 'PiYG'
 
-#plt.rc('text', usetex=True)
-#mpl.rcParams['text.latex.preamble'] = [r"\usepackage{amsmath}"]
-#mpl.rcParams['text.latex.preamble'] = [r"\boldmath"]
-
-##################################
-# Data read in starts here.      #
-##################################
+#######################
+# Array/figure setup. #
+#######################
 
 # Set up initial arrays. Obviously a better way to do this but oh well.
 xs = [0,0,0,0,0.25,0.25,0.25,0.25,0.5,0.5,0.5,0.5,0.75,0.75,0.75,0.75]
@@ -50,13 +41,6 @@ ys = np.array(ys, dtype=float)
 
 xx = np.linspace(min(xs), max(xs), 50)
 yy = np.linspace(min(ys), max(ys), 50)
-
-
-# Plot colours and parameters
-lcol = 'k'
-fcol = 'w'
-lwid = 1.2
-alph = 1.0
 
 fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(5,5))
 fig.subplots_adjust(bottom=0.15,top=0.9,left=0.1,right=0.85)
