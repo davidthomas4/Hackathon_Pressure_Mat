@@ -21,7 +21,7 @@ import re
 
 #Matplotlib parameter setup
 
-mpl.rcParams['font.size'] = 20
+mpl.rcParams['font.size'] = 40
 mpl.rcParams['font.weight'] ='bold'
 mpl.rcParams['axes.linewidth'] = 2
 mpl.rcParams['xtick.labelsize'] = 0
@@ -47,9 +47,9 @@ yy = np.linspace(min(ys), max(ys), 50)
 fig, axes = plt.subplots(nrows=1, ncols=1, figsize=(5,5))
 fig.subplots_adjust(bottom=0.15,top=0.9,left=0.1,right=0.85)
 fig.text(0.5,0.92,"Back", ha="center")
-fig.text(0.5,0.1,"Front", ha="center")
+fig.text(0.5,0.07,"Front", ha="center")
 fig.text(0.07,0.5,"Right", rotation="vertical", ha="center")
-fig.text(0.89,0.5,"Left", rotation=270, ha="center")
+fig.text(0.87,0.5,"Left", rotation=270, ha="center")
 
 heatmap = plt.subplot(111)
 heatmap.axes.set_xlim(0,0.75)
