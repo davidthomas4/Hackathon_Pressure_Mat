@@ -86,42 +86,6 @@ while True:
     data=tot/avgno-initial_data
     cc = griddata((xs, ys), data, (xx[None, :], yy[:, None]), method='cubic')
     heatmap.contourf(xx, yy, cc, 300, cmap=cmap_choice, vmin=-20, vmax=20)
-
-#    Bottom = [data[0], data[4], data[8], data[12]]
-#    Top = [data[3], data[7], data[11], data[15]]
-#    RHS = [data[12], data[13], data[14], data[15]]
-#    LHS = [data[0], data[1], data[2], data[3]]
-#
-#    RHSAv = np.average(RHS)
-#    LHSAv = np.average(LHS)
-#    TopAv = np.average(Top)
-#    BotAv = np.average(Bottom)
-#
-#    if(abs(LHSAv/RHSAv)>7):
-#        txth = "Leaning too far to the right"
-#    elif(abs(RHSAv/LHSAv)>7):
-#        txth = "Leaning too far to the left"
-#    else:
-#        txth = ""
-#    if(abs(TopAv/BotAv)>7):
-#        txtv = "Leaning too far forward"
-#    elif(abs(BotAv/TopAv)>7):
-#        txtv = "Leaning too far backward"
-#    else:
-#        txtv = ""
-
-#    HCD = heatmap.contourf(xx, yy, cc, 300, cmap=cmap_choice, vmin=0.0,
-#                           vmax=1000)
     heatmap.axes.tick_params(width=0, length=0, direction='in', top=True,
                              bottom=False)
-#    cb_ax = fig.add_axes([0.87,0.15,0.02,0.75])
-#    cbar = fig.colorbar(HCD, cax=cb_ax, ticks=[0, 250, 500, 750, 1000])
-#    cbar.set_clim(0,1000)
-#    cbar.ax_set_yticklabels([0,0.25,0.5,0.75,1])
-#    cbar.ax.tick_params(width=2, length=10)
-
-#    for txt in fig.texts:
-#        txt.set_visible(False)
-#    fig.text(0.15, 0.8, txth)
-#    fig.text(0.15, 0.7, txtv)
     plt.pause(0.0000000001)
